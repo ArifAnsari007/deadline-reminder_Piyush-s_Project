@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline Reminder Bot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Deadline Reminder Bot</h1>
+        <p>Never miss an assignment or project deadline again!</p>
+    </header>
+    <div id="status" class="status" aria-live="polite"></div>
+    <main>
+        <section id="add-deadline">
+            <h2>Add a New Deadline</h2>
+            <form id="deadline-form">
+                <label for="name">Deadline Name:</label>
+                <input type="text" id="name" required>
+                
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+                
+                <label for="time">Time:</label>
+                <input type="time" id="time" required>
+                
+                <button type="submit">Add Deadline</button>
+            </form>
+        </section>
+        <section id="deadlines-list">
+            <h2>Upcoming Deadlines</h2>
+            <button id="delete-all-btn">Delete Past Deadlines</button>
+            <ul id="deadlines"></ul>
+        </section>
+    </main>
+    
+    <div id="reminder-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Deadline Reminder!</h2>
+            <p id="reminder-message"></p>
+            <button id="dismiss-reminder">Got it!</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    
+    <div class="sticker"></div>
+    <div class="sticker"></div>
+    <div class="sticker"></div>
+    <div class="sticker"></div>
+    <div class="sticker"></div>
+</body>
+</html>
