@@ -201,5 +201,11 @@ setInterval(async ()=>{
     }
 }, 1000);
 
+// Error handler - return JSON responses for unexpected errors
+app.use((err, req, res, next) => {
+    console.error('Unhandled error:', err && err.stack ? err.stack : err);
+    try { res.status(500).json({ error: 'internal server error' }); } catch (e) { res.status(500).end(); }
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log(`Server running at http://localhost:${port}`));

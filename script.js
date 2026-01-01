@@ -108,10 +108,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 body: JSON.stringify({ name, datetime: localIso })
             });
             if (!resp.ok) {
-                const errBody = await resp.json().catch(()=>({ error: 'unknown' }));
-                showStatus(errBody.error || 'Failed to add deadline', true);
+                // Try to parse JSON error; fallback to status text
+                let msg = `Server error (${resp.status})`;
+                try {
+                    const errBody = await resp.json();
+                    if (errBody && (errBody.error || errBody.message)) msg = errBody.error || errBody.message;
+                } catch (parseErr) {
+                    console.warn('Failed to parse error body', parseErr);
+                }
+                console.warn('Create failed:', resp.status, msg);
+                showStatus(msg, true);
                 return;
             }
+            const created = await resp.json();
             form.reset();
             showStatus('Deadline added ✅');
             loadAndRender();
